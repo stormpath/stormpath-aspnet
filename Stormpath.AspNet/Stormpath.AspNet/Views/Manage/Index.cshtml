@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Manage Account";
+}
+<h2>@ViewData["Title"]</h2>
+
+<p>This route is <b>protected</b> and cannot be accessed unless you are logged in.</p>
+
+<h3>Account Details</h3>
+<p><b>Username:</b> @Account.Username</p>
+<p><b>Email:</b> @Account.Email</p>
+<p><b>Full Name:</b> @Account.FullName</p>
+<p><b>First:</b> @Account.GivenName</p>
+<p><b>Last:</b> @Account.Surname</p>
+<p><b>ID:</b> @Account.Href</p>

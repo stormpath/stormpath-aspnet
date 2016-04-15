@@ -18,22 +18,24 @@ namespace Stormpath.AspNet
     {
         private RouteProtector handler;
 
-        public override async Task<bool> InvokeAsync()
-        {
-            var ticket = await AuthenticateAsync();
+        //public override async Task<bool> InvokeAsync()
+        //{
+        //    var ticket = await AuthenticateAsync();
 
-            if (ticket != null)
-            {
-                Context.Authentication.SignIn(ticket.Properties, ticket.Identity);
+        //    if (ticket != null)
+        //    {
+        //        Context.Authentication.SignIn(ticket.Properties, ticket.Identity);
 
-                // All good! Let the rest of the pipeline run
-                return false;
-            }
-            else
-            {
-                return true; // Prevent further processing (return challenge)
-            }
-        }
+        //        // All good! Let the rest of the pipeline run
+        //        return false;
+        //    }
+        //    else
+        //    {
+        //        //return true; // Prevent further processing (return challenge)
+        //    }
+
+        //    return false; // Let the rest of the pipeline run
+        //}
 
         protected override Task<AuthenticationTicket> AuthenticateCoreAsync()
         {
@@ -71,10 +73,18 @@ namespace Stormpath.AspNet
 
         protected override Task ApplyResponseChallengeAsync()
         {
-            if (this.handler != null)
+            if (Response.StatusCode == 401)
             {
-                // Redirects and deletes cookies as necessary
-                handler.OnUnauthorized(Request.Headers["Accept"], Request.Path.ToString());
+                var challenge = Helper.LookupChallenge(Options.AuthenticationType, Options.AuthenticationMode);
+
+                if (challenge != null)
+                {
+                    if (this.handler != null)
+                    {
+                        // Redirects and deletes cookies as necessary
+                        handler.OnUnauthorized(Request.Headers["Accept"], Request.Path.ToString());
+                    }
+                }
             }
 
             return Task.FromResult<object>(null);

@@ -11,7 +11,7 @@ namespace Stormpath.AspNet
         public StormpathAuthenticationOptions(string authenticationType)
             : base(authenticationType)
         {
-            this.AuthenticationMode = Microsoft.Owin.Security.AuthenticationMode.Passive;
+            this.AuthenticationMode = Microsoft.Owin.Security.AuthenticationMode.Active;
         }
     }
 }

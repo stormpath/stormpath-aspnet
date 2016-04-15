@@ -1,5 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Manage Account";
+    Stormpath.SDK.Account.IAccount Account = Context.Request.GetOwinContext().Get<Stormpath.SDK.Account.IAccount>(Stormpath.Owin.Abstractions.OwinKeys.StormpathUser);
 }
 <h2>@ViewData["Title"]</h2>
 

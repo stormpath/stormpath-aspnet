@@ -1,15 +1,14 @@
 ﻿@{
     ViewData["Title"] = "Manage Account";
-    Stormpath.SDK.Account.IAccount Account = Context.Request.GetOwinContext().Get<Stormpath.SDK.Account.IAccount>(Stormpath.Owin.Abstractions.OwinKeys.StormpathUser);
 }
 <h2>@ViewData["Title"]</h2>
 
 <p>This route is <b>protected</b> and cannot be accessed unless you are logged in.</p>
 
 <h3>Account Details</h3>
-<p><b>Username:</b> @Account.Username</p>
-<p><b>Email:</b> @Account.Email</p>
-<p><b>Full Name:</b> @Account.FullName</p>
-<p><b>First:</b> @Account.GivenName</p>
-<p><b>Last:</b> @Account.Surname</p>
-<p><b>ID:</b> @Account.Href</p>
+<p><b>Username:</b> @Request.GetStormpathAccount().Username</p>
+<p><b>Email:</b> @Request.GetStormpathAccount().Email</p>
+<p><b>Full Name:</b> @Request.GetStormpathAccount().FullName</p>
+<p><b>First:</b> @Request.GetStormpathAccount().GivenName</p>
+<p><b>Last:</b> @Request.GetStormpathAccount().Surname</p>
+<p><b>ID:</b> @Request.GetStormpathAccount().Href</p>

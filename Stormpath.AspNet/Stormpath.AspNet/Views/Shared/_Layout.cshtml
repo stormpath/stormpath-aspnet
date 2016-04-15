@@ -30,7 +30,7 @@
                         <ul class="nav navbar-nav navbar-right">
 
                             <li><p class="navbar-text">Hello, <b>@Context.User.Identity.Name</b></p></li>
-                            <li><a asp-controller="Manage" asp-action="Index">Manage Account</a></li>
+                            <li>@Html.ActionLink("Manage Account", "Index", "Manage")</li>
                             <li>
                                 <a onclick="document.getElementById('logout_form').submit();" style="cursor: pointer;">Log Out</a>
                             </li>

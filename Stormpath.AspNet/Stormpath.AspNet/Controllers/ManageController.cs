@@ -1,24 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace Stormpath.AspNet.Controllers
 {
     [Authorize]
     public class ManageController : Controller
     {
-        // Stormpath Client can be injected using DI
-        //[FromServices]
-        //public IClient StormpathClient { get; set; }
-
-        //[FromServices]
-        //public IAccount StormpathUser { get; set; }
-
         // GET: /<controller>/
         public ActionResult Index()
         {
+            // The Stormpath Client can be retrieved from the request
+            var client = Request.GetStormpathClient();
+
+            // The current logged in Stormpath Account (if any) can be retrieved as well
+            var account = Request.GetStormpathAccount();
+
             return View();
         }
     }

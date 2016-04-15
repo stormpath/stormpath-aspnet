@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
@@ -17,25 +15,6 @@ namespace Stormpath.AspNet
     public sealed class StormpathAuthenticationHandler : AuthenticationHandler<StormpathAuthenticationOptions>
     {
         private RouteProtector handler;
-
-        //public override async Task<bool> InvokeAsync()
-        //{
-        //    var ticket = await AuthenticateAsync();
-
-        //    if (ticket != null)
-        //    {
-        //        Context.Authentication.SignIn(ticket.Properties, ticket.Identity);
-
-        //        // All good! Let the rest of the pipeline run
-        //        return false;
-        //    }
-        //    else
-        //    {
-        //        //return true; // Prevent further processing (return challenge)
-        //    }
-
-        //    return false; // Let the rest of the pipeline run
-        //}
 
         protected override Task<AuthenticationTicket> AuthenticateCoreAsync()
         {

@@ -82,6 +82,10 @@
       <HintPath>..\packages\RestSharp.105.2.2\lib\net451\RestSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Stormpath.AspNet, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\src\Stormpath.AspNet\bin\Debug\net451\Stormpath.AspNet.dll</HintPath>
+    </Reference>
     <Reference Include="Stormpath.Configuration, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Stormpath.Configuration.4.0.0\lib\net451\Stormpath.Configuration.dll</HintPath>
       <Private>True</Private>

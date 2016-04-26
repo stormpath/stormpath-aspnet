@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
-namespace Stormpath.AspNet
+namespace Stormpath.AspNet.TckHarness
 {
     public class MvcApplication : System.Web.HttpApplication
     {

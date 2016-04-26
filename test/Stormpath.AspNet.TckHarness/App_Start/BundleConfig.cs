@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace Stormpath.AspNet
+namespace Stormpath.AspNet.TckHarness
 {
     public class BundleConfig
     {

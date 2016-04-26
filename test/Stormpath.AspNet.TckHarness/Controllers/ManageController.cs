@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Stormpath.AspNet.Controllers
+namespace Stormpath.AspNet.TckHarness.Controllers
 {
     [Authorize]
     public class ManageController : Controller

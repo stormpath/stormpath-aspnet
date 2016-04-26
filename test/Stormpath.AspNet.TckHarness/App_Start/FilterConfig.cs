@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace Stormpath.AspNet
+namespace Stormpath.AspNet.TckHarness
 {
     public class FilterConfig
     {

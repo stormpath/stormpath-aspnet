@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Stormpath.AspNet.Controllers
+namespace Stormpath.AspNet.TckHarness.Controllers
 {
     public class HomeController : Controller
     {

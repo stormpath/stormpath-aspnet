@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using Microsoft.Owin.Extensions;
 using Owin;
 using Stormpath.Owin.Middleware;
 
@@ -25,6 +26,8 @@ namespace Stormpath.AspNet
 
             app.Use<StormpathAuthenticationMiddleware>(new StormpathAuthenticationOptions("Cookie"));
             app.Use<StormpathAuthenticationMiddleware>(new StormpathAuthenticationOptions("Bearer"));
+
+            app.UseStageMarker(PipelineStage.Authenticate);
 
             return app;
         }

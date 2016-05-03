@@ -9,8 +9,8 @@
     "Microsoft.Owin": "3.0.1",
     "Microsoft.Owin.Host.SystemWeb": "3.0.1",
     "Microsoft.Owin.Security": "3.0.1",
-    "Stormpath.Owin.Middleware": "0.1.1",
-    "Stormpath.Owin.Views.Precompiled": "0.1.0"
+    "Stormpath.Owin.Middleware": "0.1.2",
+    "Stormpath.Owin.Views.Precompiled": "0.1.2"
   },
   "description": "Stormpath.AspNet Class Library",
   "frameworks": {
@@ -37,5 +37,5 @@
   "tooling": {
     "defaultNamespace": "Stormpath.AspNet"
   },
-  "version": "0.1.0-beta1"
+  "version": "0.1.2-beta1"
 }

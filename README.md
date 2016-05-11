@@ -54,7 +54,7 @@ You can add Stormpath to a new or existing ASP.NET project with only two lines o
  
 6. **Add `Startup.cs`**
 
- If your project doesn't contain an OWIN Startup class (`Startup.cs`) file, you'll need to add one. Right-click on your solution, select **Add** - **New Item**, and search for "OWIN Startup class".
+ If your project doesn't contain an OWIN Startup class (`Startup.cs`) file, you'll need to add one. Right-click on your project in the Solution Explorer, select **Add** - **New Item**, and search for "OWIN Startup class".
  
 7. **Install the middleware package**
 

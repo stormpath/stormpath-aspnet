@@ -144,6 +144,7 @@
     <Compile Include="Startup_Login.cs" />
     <Compile Include="Startup_Logout.cs" />
     <Compile Include="Startup_Me.cs" />
+    <Compile Include="Startup_ViewTemplates.cs" />
     <Compile Include="Startup_Oauth2.cs" />
     <Compile Include="Startup_Register.cs" />
     <Compile Include="Startup_Quickstart.cs" />

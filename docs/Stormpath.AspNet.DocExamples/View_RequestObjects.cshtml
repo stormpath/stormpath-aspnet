@@ -1,0 +1,8 @@
+﻿@* #region code/request_objets/aspnet/user_iprincipal.cstml *@
+
+@if (Context.User.Identity.IsAuthenticated)
+{
+    <p>Hello, <b>@Context.User.Identity.Name</b>!</p>
+}
+
+@* #endregion *@

@@ -1,18 +1,17 @@
-﻿using System.Collections.Generic;
+﻿#region code/quickstart/aspnet/configure.cs
+using Microsoft.Owin;
 using Owin;
-using Stormpath.Configuration.Abstractions;
+using Stormpath.AspNet;
 
-namespace Stormpath.AspNet.DocExamples
+[assembly: OwinStartup(typeof(MyApplication.Startup))]
+namespace MyApplication
 {
-    public class Startup_Quickstart
+    public class Startup
     {
-        #region code/quickstart/aspnet/configure.cs
         public void Configuration(IAppBuilder app)
         {
             app.UseStormpath();
-
-            // MVC or other framework middleware here
         }
-        #endregion
     }
 }
+#endregion

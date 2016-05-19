@@ -41,25 +41,6 @@ namespace Stormpath.AspNet.DocExamples
         }
         #endregion
 
-        #region code/request_objects/aspnet/injecting_user.cs
-        public async Task<IHttpActionResult> GetDetails()
-        {
-            var account = Request.GetStormpathAccount();
-
-            // If the request is authenticated, do something with the account
-            // (like get the account's Custom Data):
-            if (account != null)
-            {
-                var customData = await account.GetCustomDataAsync();
-                var favoriteColor = customData["favoriteColor"]?.ToString();
-
-                return Ok(favoriteColor);
-            }
-
-            return Ok();
-        }
-        #endregion
-
         #region code/request_objects/aspnet/update_user_password.cs
         [HttpPost]
         [Authorize]

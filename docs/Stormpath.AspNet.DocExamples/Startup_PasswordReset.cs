@@ -4,18 +4,22 @@ using Stormpath.Configuration.Abstractions;
 
 namespace Stormpath.AspNet.DocExamples
 {
-    public class Startup_Me
+    public class Startup_PasswordReset
     {
-        public void Configuration_MeUri(IAppBuilder app)
+        public void Configuation_PasswordResetUris(IAppBuilder app)
         {
-            #region code/me_api/aspnet/configure_uri.cs
+            #region code/password_reset/aspnet/configure_uris.cs
             app.UseStormpath(new StormpathConfiguration
             {
                 Web = new WebConfiguration
                 {
-                    Me = new WebMeRouteConfiguration
+                    ForgotPassword = new WebForgotPasswordRouteConfiguration
                     {
-                        Uri = "/userDetails"
+                        Uri = "/forgot-password"
+                    },
+                    ChangePassword = new WebChangePasswordRouteConfiguration
+                    {
+                        Uri = "/change-password"
                     }
                 }
             });

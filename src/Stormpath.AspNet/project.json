@@ -1,6 +1,10 @@
 {
   "authors": [ "Nate Barbettini" ],
   "buildOptions": {
+    "nowarn": [
+      "CS1591"
+    ],
+    "warningsAsErrors": true,
     "xmlDoc": true
   },
   "copyright": "(c) 2016 Stormpath, Inc.",
@@ -9,8 +13,8 @@
     "Microsoft.Owin": "3.0.1",
     "Microsoft.Owin.Host.SystemWeb": "3.0.1",
     "Microsoft.Owin.Security": "3.0.1",
-    "Stormpath.Owin.Middleware": "0.2.0-beta1",
-    "Stormpath.Owin.Views.Precompiled": "0.2.0-beta1"
+    "Stormpath.Owin.Middleware": "0.2.0",
+    "Stormpath.Owin.Views.Precompiled": "0.2.0"
   },
   "description": "Stormpath middleware for ASP.NET 4.5+. Easily adds authentication and authorization to ASP.NET applications.",
   "frameworks": {
@@ -33,5 +37,5 @@
   "tooling": {
     "defaultNamespace": "Stormpath.AspNet"
   },
-  "version": "0.2.0-beta1"
+  "version": "0.2.0"
 }

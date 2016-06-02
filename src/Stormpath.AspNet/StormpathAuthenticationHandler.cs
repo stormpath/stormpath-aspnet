@@ -14,7 +14,13 @@ namespace Stormpath.AspNet
 {
     public sealed class StormpathAuthenticationHandler : AuthenticationHandler<StormpathAuthenticationOptions>
     {
+        private readonly SDK.Logging.ILogger stormpathLogger;
         private RouteProtector handler;
+
+        public StormpathAuthenticationHandler(SDK.Logging.ILogger stormpathLogger)
+        {
+            this.stormpathLogger = stormpathLogger;
+        }
 
         protected override Task<AuthenticationTicket> AuthenticateCoreAsync()
         {
@@ -37,7 +43,8 @@ namespace Stormpath.AspNet
                 config.Web,
                 deleteCookieAction,
                 setStatusCodeAction,
-                redirectAction);
+                redirectAction,
+                this.stormpathLogger);
 
             if (this.handler.IsAuthenticated(scheme, Options.AuthenticationType, account))
             {

@@ -1,7 +1,6 @@
 {
   "authors": [ "Nate Barbettini" ],
   "compilationOptions": {
-    "warningsAsErrors": true,
     "xmlDoc": true
   },
   "copyright": "(c) 2016 Stormpath, Inc.",
@@ -10,8 +9,8 @@
     "Microsoft.Owin": "3.0.1",
     "Microsoft.Owin.Host.SystemWeb": "3.0.1",
     "Microsoft.Owin.Security": "3.0.1",
-    "Stormpath.Owin.Middleware": "0.1.2",
-    "Stormpath.Owin.Views.Precompiled": "0.1.2"
+    "Stormpath.Owin.Middleware": "0.1.5",
+    "Stormpath.Owin.Views.Precompiled": "0.1.4"
   },
   "description": "Stormpath.AspNet Class Library",
   "frameworks": {
@@ -38,5 +37,5 @@
   "tooling": {
     "defaultNamespace": "Stormpath.AspNet"
   },
-  "version": "0.1.2-beta3"
+  "version": "0.1.2-beta4"
 }

@@ -34,12 +34,12 @@ namespace Stormpath.AspNet
 
         private static string GetLibraryUserAgent(IAppBuilder app)
         {
-            var builder = new StringBuilder();
+            var libraryVersion = typeof(StormpathMiddleware).Assembly.GetName().Version;
+            var libraryToken = $"stormpath-aspnet/{libraryVersion.Major}.{libraryVersion.Minor}.{libraryVersion.Build}";
 
-            builder.Append($"aspnet/{Environment.Version.ToString()}");
-            // todo append MVC package version
+            var hostToken = $"aspnet/{Environment.Version.ToString()}";
 
-            return builder.ToString();
+            return string.Join(" ", libraryToken, hostToken);
         }
     }
 }

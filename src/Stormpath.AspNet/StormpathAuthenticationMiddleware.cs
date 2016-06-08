@@ -1,22 +1,23 @@
 ﻿using Microsoft.Owin;
 using Microsoft.Owin.Security.Infrastructure;
+using Stormpath.SDK.Logging;
 
 namespace Stormpath.AspNet
 {
     public class StormpathAuthenticationMiddleware : AuthenticationMiddleware<StormpathAuthenticationOptions>
     {
-        private readonly SDK.Logging.ILogger stormpathLogger;
+        private readonly ILogger _stormpathLogger;
 
-        public StormpathAuthenticationMiddleware(OwinMiddleware next, StormpathAuthenticationOptions options)
+        public StormpathAuthenticationMiddleware(OwinMiddleware next, StormpathAuthenticationOptions options, ILogger logger)
             : base(next, options)
         {
-            this.stormpathLogger = null; // todo make logging available
+            _stormpathLogger = logger;
         }
 
         // Called for each request, to create a handler for each request.
         protected override AuthenticationHandler<StormpathAuthenticationOptions> CreateHandler()
         {
-            return new StormpathAuthenticationHandler(this.stormpathLogger);
+            return new StormpathAuthenticationHandler(_stormpathLogger);
         }
     }
 }

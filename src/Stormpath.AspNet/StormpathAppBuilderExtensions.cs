@@ -3,6 +3,7 @@ using Microsoft.Owin.Extensions;
 using Owin;
 using Stormpath.Configuration.Abstractions;
 using Stormpath.Owin.Middleware;
+using Stormpath.Owin.Views.Precompiled;
 
 namespace Stormpath.AspNet
 {
@@ -30,10 +31,14 @@ namespace Stormpath.AspNet
                 throw new ArgumentNullException(nameof(app));
             }
 
-            var stormpathMiddleware = StormpathMiddleware.Create(new Owin.Middleware.StormpathMiddlewareOptions()
+            var viewRenderer = new CompositeViewRenderer(options?.Logger,
+                new PrecompiledViewRenderer(options?.Logger),
+                new RazorViewRenderer());
+
+            var stormpathMiddleware = StormpathMiddleware.Create(new StormpathOwinOptions()
             {
                 LibraryUserAgent = GetLibraryUserAgent(),
-                ViewRenderer = new SimpleViewRenderer(),
+                ViewRenderer = viewRenderer,
                 Configuration = options?.Configuration,
                 Logger = options?.Logger,
             });

@@ -91,19 +91,19 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Stormpath.Configuration.Abstractions, Version=5.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Stormpath.Configuration.Abstractions.5.1.0\lib\net45\Stormpath.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Stormpath.Owin.Abstractions, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Stormpath.Owin.Abstractions.0.2.0\lib\net45\Stormpath.Owin.Abstractions.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Stormpath.Owin.Abstractions, Version=0.1.5.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Stormpath.Owin.Abstractions.0.1.5\lib\net45\Stormpath.Owin.Abstractions.dll</HintPath>
+    <Reference Include="Stormpath.Owin.Middleware, Version=0.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Stormpath.Owin.Middleware.0.2.1-beta1\lib\net45\Stormpath.Owin.Middleware.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Stormpath.Owin.Middleware, Version=0.1.5.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Stormpath.Owin.Middleware.0.1.5\lib\net45\Stormpath.Owin.Middleware.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Stormpath.Owin.Views.Precompiled, Version=0.1.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Stormpath.Owin.Views.Precompiled.0.1.4\lib\net45\Stormpath.Owin.Views.Precompiled.dll</HintPath>
+    <Reference Include="Stormpath.Owin.Views.Precompiled, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Stormpath.Owin.Views.Precompiled.0.2.0\lib\net45\Stormpath.Owin.Views.Precompiled.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Stormpath.SDK.Abstractions, Version=0.9.1.0, Culture=neutral, processorArchitecture=MSIL">

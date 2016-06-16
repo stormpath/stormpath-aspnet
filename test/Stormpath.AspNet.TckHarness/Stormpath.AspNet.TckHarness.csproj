@@ -45,8 +45,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FlexibleConfiguration, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\FlexibleConfiguration.1.1.0\lib\net45\FlexibleConfiguration.dll</HintPath>
+    <Reference Include="FlexibleConfiguration, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FlexibleConfiguration.1.1.1\lib\net45\FlexibleConfiguration.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -86,32 +86,32 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\src\Stormpath.AspNet\bin\Debug\net45\Stormpath.AspNet.dll</HintPath>
     </Reference>
-    <Reference Include="Stormpath.Configuration, Version=5.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Stormpath.Configuration.5.1.0\lib\net45\Stormpath.Configuration.dll</HintPath>
+    <Reference Include="Stormpath.Configuration, Version=5.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Stormpath.Configuration.5.1.1\lib\net45\Stormpath.Configuration.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Stormpath.Configuration.Abstractions, Version=5.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Stormpath.Configuration.Abstractions.5.1.0\lib\net45\Stormpath.Configuration.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Stormpath.Owin.Abstractions, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Stormpath.Owin.Abstractions.0.2.0\lib\net45\Stormpath.Owin.Abstractions.dll</HintPath>
+    <Reference Include="Stormpath.Owin.Abstractions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Stormpath.Owin.Abstractions.1.0.0\lib\net45\Stormpath.Owin.Abstractions.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Stormpath.Owin.Middleware, Version=0.2.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Stormpath.Owin.Middleware.0.2.1-beta1\lib\net45\Stormpath.Owin.Middleware.dll</HintPath>
+    <Reference Include="Stormpath.Owin.Middleware, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Stormpath.Owin.Middleware.1.0.0\lib\net45\Stormpath.Owin.Middleware.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Stormpath.Owin.Views.Precompiled, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Stormpath.Owin.Views.Precompiled.0.2.0\lib\net45\Stormpath.Owin.Views.Precompiled.dll</HintPath>
+    <Reference Include="Stormpath.Owin.Views.Precompiled, Version=0.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Stormpath.Owin.Views.Precompiled.0.2.1\lib\net45\Stormpath.Owin.Views.Precompiled.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Stormpath.SDK.Abstractions, Version=0.9.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Stormpath.SDK.Abstractions.0.9.1\lib\net45\Stormpath.SDK.Abstractions.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Stormpath.SDK.Core, Version=0.9.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Stormpath.SDK.Core.0.9.1\lib\net45\Stormpath.SDK.Core.dll</HintPath>
+    <Reference Include="Stormpath.SDK.Core, Version=0.9.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Stormpath.SDK.Core.0.9.2\lib\net45\Stormpath.SDK.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Stormpath.SDK.JsonNetSerializer, Version=0.9.1.0, Culture=neutral, processorArchitecture=MSIL">
@@ -260,6 +260,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Stormpath\MyLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

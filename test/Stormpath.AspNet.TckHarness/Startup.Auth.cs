@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using Owin;
+using Stormpath.Configuration.Abstractions;
 using Stormpath.SDK.Logging;
 
 namespace Stormpath.AspNet.TckHarness
@@ -10,11 +11,18 @@ namespace Stormpath.AspNet.TckHarness
     {
         public void ConfigureAuth(IAppBuilder app)
         {
-            var stormpathConfig = new
+            var stormpathConfig = new StormpathConfiguration()
             {
-                application = new
+                Application = new ApplicationConfiguration()
                 {
-                    name = "My Application"
+                    Name = "My Application"
+                },
+                Web = new WebConfiguration()
+                {
+                    Login = new WebLoginRouteConfiguration()
+                    {
+                        View = "MyLogin"
+                    }
                 }
             };
 

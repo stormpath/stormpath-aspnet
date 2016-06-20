@@ -9,6 +9,7 @@
   },
   "copyright": "(c) 2016 Stormpath, Inc.",
   "dependencies": {
+    "Microsoft.AspNet.Mvc": "5.2.3",
     "Microsoft.AspNet.WebApi.Owin": "5.2.3",
     "Microsoft.Owin": "3.0.1",
     "Microsoft.Owin.Host.SystemWeb": "3.0.1",

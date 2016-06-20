@@ -33,7 +33,7 @@ namespace Stormpath.AspNet
 
             var viewRenderer = new CompositeViewRenderer(options?.Logger,
                 new PrecompiledViewRenderer(options?.Logger),
-                new RazorViewRenderer());
+                new RazorViewRenderer(options?.Logger));
 
             var stormpathMiddleware = StormpathMiddleware.Create(new StormpathOwinOptions()
             {

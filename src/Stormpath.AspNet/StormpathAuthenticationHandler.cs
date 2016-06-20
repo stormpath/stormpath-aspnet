@@ -46,50 +46,36 @@ namespace Stormpath.AspNet
                 redirectAction,
                 this.stormpathLogger);
 
-            if (this.handler.IsAuthenticated(scheme, Options.AuthenticationType, account))
+            if (!handler.IsAuthenticated(scheme, Options.AuthenticationType, account))
             {
-                var principal = CreatePrincipal(account, scheme);
-                var ticket = new AuthenticationTicket(principal, new AuthenticationProperties());
-
-                return Task.FromResult(ticket);
+                return Task.FromResult<AuthenticationTicket>(null);
             }
-
-            return Task.FromResult<AuthenticationTicket>(null);
+                
+            var principal = AccountIdentityTransformer.CreateIdentity(account, scheme);
+            var ticket = new AuthenticationTicket(principal, new AuthenticationProperties());
+            return Task.FromResult(ticket);
         }
 
         protected override Task ApplyResponseChallengeAsync()
         {
-            if (Response.StatusCode == 401)
+            if (Response.StatusCode != 401)
             {
-                var challenge = Helper.LookupChallenge(Options.AuthenticationType, Options.AuthenticationMode);
+                return Task.FromResult<object>(null);
+            }
 
-                if (challenge != null)
-                {
-                    if (this.handler != null)
-                    {
-                        // Redirects and deletes cookies as necessary
-                        handler.OnUnauthorized(Request.Headers["Accept"], Request.Path.ToString());
-                    }
-                }
+            var challenge = Helper.LookupChallenge(Options.AuthenticationType, Options.AuthenticationMode);
+            if (challenge == null)
+            {
+                return Task.FromResult<object>(null);
+            }
+
+            if (this.handler != null)
+            {
+                // Redirects and deletes cookies as necessary
+                handler.OnUnauthorized(Request.Headers["Accept"], Request.Path.ToString());
             }
 
             return Task.FromResult<object>(null);
         }
-
-        private static ClaimsIdentity CreatePrincipal(IAccount account, string scheme)
-        {
-            var claims = new List<Claim>();
-            claims.Add(new Claim(ClaimTypes.NameIdentifier, account.Href));
-            claims.Add(new Claim(ClaimTypes.Email, account.Email));
-            claims.Add(new Claim(ClaimTypes.Name, account.Username));
-            claims.Add(new Claim(ClaimTypes.GivenName, account.GivenName));
-            claims.Add(new Claim(ClaimTypes.Surname, account.Surname));
-            claims.Add(new Claim("FullName", account.FullName));
-
-            var identity = new ClaimsIdentity(claims, scheme);
-
-            return identity;
-        }
     }
-
 }

@@ -40,6 +40,7 @@ namespace Stormpath.AspNet
                 LibraryUserAgent = GetLibraryUserAgent(),
                 ViewRenderer = viewRenderer,
                 Configuration = options?.Configuration,
+                ConfigurationFileRoot = AppDomain.CurrentDomain.BaseDirectory,
                 Logger = options?.Logger,
             });
 

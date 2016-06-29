@@ -11,26 +11,10 @@ namespace Stormpath.AspNet.TckHarness
     {
         public void ConfigureAuth(IAppBuilder app)
         {
-            var stormpathConfig = new StormpathConfiguration()
-            {
-                Application = new ApplicationConfiguration()
-                {
-                    Name = "My Application"
-                },
-                Web = new WebConfiguration()
-                {
-                    Login = new WebLoginRouteConfiguration()
-                    {
-                        View = "MyLogin"
-                    }
-                }
-            };
-
             var logPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "StormpathMiddleware.log");
 
             app.UseStormpath(new StormpathMiddlewareOptions()
             {
-                Configuration = stormpathConfig,
                 Logger = new FileLogger(logPath, LogLevel.Trace)
             });
         }

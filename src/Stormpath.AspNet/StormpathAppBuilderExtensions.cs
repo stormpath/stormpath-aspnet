@@ -46,8 +46,10 @@ namespace Stormpath.AspNet
 
             app.Use(stormpathMiddleware);
 
-            app.Use<StormpathAuthenticationMiddleware>(new StormpathAuthenticationOptions("Cookie"), options?.Logger);
-            app.Use<StormpathAuthenticationMiddleware>(new StormpathAuthenticationOptions("Bearer"), options?.Logger);
+            app.Use<StormpathAuthenticationMiddleware>(
+                new StormpathAuthenticationOptions() { AllowedAuthenticationSchemes = new[] { "Cookie", "Bearer" } },
+                stormpathMiddleware.Configuration,
+                options?.Logger);
 
             app.UseStageMarker(PipelineStage.Authenticate);
 

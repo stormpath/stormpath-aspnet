@@ -119,5 +119,18 @@ namespace Stormpath.AspNet.DocExamples
             });
             #endregion
         }
+
+        public void Configuration_ServerUri(IAppBuilder app)
+        {
+            #region code/configuration/aspnet/server_uri.cs
+            app.UseStormpath(new StormpathConfiguration()
+            {
+                Web = new WebConfiguration()
+                {
+                    ServerUri = "http://localhost:5000"
+                }
+            });
+            #endregion
+        }
     }
 }

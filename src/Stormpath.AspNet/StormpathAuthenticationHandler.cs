@@ -65,7 +65,7 @@ namespace Stormpath.AspNet
 
         protected override Task ApplyResponseChallengeAsync()
         {
-            if (Response.StatusCode != 401 || Response.StatusCode != 403)
+            if (Response.StatusCode != 401 && Response.StatusCode != 403)
             {
                 return Task.FromResult<object>(null);
             }

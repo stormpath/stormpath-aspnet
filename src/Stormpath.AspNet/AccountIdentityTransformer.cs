@@ -1,7 +1,6 @@
-﻿using Stormpath.SDK.Account;
-using Stormpath.SDK.Sync;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Security.Claims;
+using Stormpath.SDK.Account;
 
 namespace Stormpath.AspNet
 {
@@ -11,8 +10,8 @@ namespace Stormpath.AspNet
         {
             var identity = CreateIdentity(account, scheme);
 
-            return identity == null
-                ? null
+            return identity == null 
+                ? null 
                 : new ClaimsPrincipal(identity);
         }
 
@@ -22,7 +21,7 @@ namespace Stormpath.AspNet
             {
                 return null;
             }
-            
+
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, account.Href),
@@ -32,13 +31,6 @@ namespace Stormpath.AspNet
                 new Claim(ClaimTypes.Surname, account.Surname),
                 new Claim("FullName", account.FullName)
             };
-
-            //var groups = account.GetGroups().Synchronously();
-
-            //foreach (var group in groups)
-            //{
-            //    claims.Add(new Claim(ClaimTypes.Role, group.Name));
-            //}
 
             var identity = new ClaimsIdentity(claims, scheme);
 

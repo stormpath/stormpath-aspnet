@@ -15,6 +15,7 @@ namespace Stormpath.AspNet.TckHarness.Controllers
     {
         //[StormpathGroupsRequired("Test")]
         //[StormpathGroupsRequired("Hello")]
+        //[StormpathCustomDataRequired("isAdmin", true)]
         public string Get(CancellationToken ct)
         {
             var account = Request.GetStormpathAccount();

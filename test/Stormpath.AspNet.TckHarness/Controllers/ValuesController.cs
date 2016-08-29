@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Web.Http;
 using Stormpath.AspNet;
-using Stormpath.AspNet.Web.Http.Filters;
+using Stormpath.AspNet.WebApi;
 
 namespace Stormpath.AspNet.TckHarness.Controllers
 {

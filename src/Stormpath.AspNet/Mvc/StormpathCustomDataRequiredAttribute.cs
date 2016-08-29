@@ -7,20 +7,18 @@ using System.Web.Mvc.Filters;
 using Stormpath.SDK.Account;
 using Stormpath.SDK.Sync;
 
-namespace Stormpath.AspNet.Web.Mvc.Filters
+namespace Stormpath.AspNet.Mvc
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true)]
-    public class StormpathGroupsRequiredAttribute : ActionFilterAttribute, IAuthenticationFilter
+    public class StormpathCustomDataRequiredAttribute : ActionFilterAttribute, IAuthenticationFilter
     {
-        private readonly string[] allowedGroupNames;
+        private readonly string key;
+        private readonly object value;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="StormpathGroupsRequiredAttribute"/> class.
-        /// </summary>
-        /// <param name="allowedGroupNames"></param>
-        public StormpathGroupsRequiredAttribute(params string[] allowedGroupNames)
+        public StormpathCustomDataRequiredAttribute(string key, object value)
         {
-            this.allowedGroupNames = allowedGroupNames;
+            this.key = key;
+            this.value = value;
         }
 
         public void OnAuthentication(AuthenticationContext filterContext)
@@ -38,33 +36,21 @@ namespace Stormpath.AspNet.Web.Mvc.Filters
                 return;
             }
 
-            var groupNames = GetGroupNames(account);
+            var customData = account.GetCustomData();
 
-            var matchingGroupFound = false;
-
-            foreach (var name in allowedGroupNames)
-            {
-                matchingGroupFound = groupNames.Contains(name, StringComparer.OrdinalIgnoreCase);
-
-                if (matchingGroupFound)
-                {
-                    break;
-                }
-            }
-
-            if (!matchingGroupFound)
+            if (customData?[key] == null)
             {
                 filterContext.Result = new HttpUnauthorizedResult("Not Authorized");
                 return;
             }
 
-            // At least one group matches; okay to continue!
-            // This functionality matches the [Authorize] attribute.  Use multiple [StormpathGroupsRequired] attributes to create "and" conditions
-        }
+            if (!customData[key].Equals(value))
+            {
+                filterContext.Result = new HttpUnauthorizedResult("Not Authorized");
+                return;
+            }
 
-        public List<string> GetGroupNames(IAccount account)
-        {
-            return account.GetGroups().Synchronously().ToList().Select(g => g.Name).ToList();
+            // The Custom Data matches; okay to continue!
         }
 
         public void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)

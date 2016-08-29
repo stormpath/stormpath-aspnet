@@ -5,16 +5,18 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http.Filters;
 
-namespace Stormpath.AspNet.Web.Http.Filters
+namespace Stormpath.AspNet.WebApi
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true)]
-    public sealed class StormpathGroupsRequiredAttribute : Attribute, IAuthenticationFilter
+    public sealed class StormpathCustomDataRequiredAttribute : Attribute, IAuthenticationFilter
     {
-        private readonly string[] allowedGroupNames;
+        private readonly string key;
+        private readonly object value;
 
-        public StormpathGroupsRequiredAttribute(params string[] allowedGroupNames)
+        public StormpathCustomDataRequiredAttribute(string key, object value)
         {
-            this.allowedGroupNames = allowedGroupNames;
+            this.key = key;
+            this.value = value;
         }
 
         public async Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
@@ -32,32 +34,21 @@ namespace Stormpath.AspNet.Web.Http.Filters
                 return;
             }
 
-            var groupNames = (await account
-                .GetGroups()
-                .ToListAsync())
-                .Select(g => g.Name)
-                .ToList();
+            var customData = await account.GetCustomDataAsync();
 
-            var matchingGroupFound = false;
-
-            foreach (var name in allowedGroupNames)
-            {
-                matchingGroupFound = groupNames.Contains(name, StringComparer.OrdinalIgnoreCase);
-
-                if (matchingGroupFound)
-                {
-                    break;
-                }
-            }
-
-            if (!matchingGroupFound)
+            if (customData?[key] == null)
             {
                 context.ErrorResult = new AuthorizationFailureResult("Not Authorized", context.Request);
                 return;
             }
 
-            // At least one group matches; okay to continue!
-            // This functionality matches the [Authorize] attribute.  Use multiple [StormpathGroupsRequired] attributes to create "and" conditions
+            if (!customData[key].Equals(value))
+            {
+                context.ErrorResult = new AuthorizationFailureResult("Not Authorized", context.Request);
+                return;
+            }
+
+            // The Custom Data matches; okay to continue!
         }
 
         public Task ChallengeAsync(HttpAuthenticationChallengeContext context, CancellationToken cancellationToken)

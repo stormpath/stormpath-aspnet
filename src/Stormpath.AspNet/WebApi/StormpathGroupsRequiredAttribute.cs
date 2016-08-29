@@ -36,36 +36,14 @@ namespace Stormpath.AspNet.WebApi
             }
 
             var account = context.Request.GetStormpathAccount();
-            if (account == null)
+
+            var requiredGroupsFilter = new RequiredGroupsFilter(allowedGroupNames);
+            var authorized = await requiredGroupsFilter.IsAuthorized(account);
+            if (!authorized)
             {
                 context.ErrorResult = new AuthorizationFailureResult("Not Authorized", context.Request);
                 return;
             }
-
-            var groupNames = (await account
-                .GetGroups()
-                .ToListAsync())
-                .Select(g => g.Name)
-                .ToList();
-
-            var matchingGroupFound = false;
-
-            foreach (var name in allowedGroupNames)
-            {
-                matchingGroupFound = groupNames.Contains(name, StringComparer.OrdinalIgnoreCase);
-
-                if (matchingGroupFound)
-                {
-                    break;
-                }
-            }
-
-            if (!matchingGroupFound)
-            {
-                context.ErrorResult = new AuthorizationFailureResult("Not Authorized", context.Request);
-                return;
-            }
-
             // At least one group matches; okay to continue!
         }
 

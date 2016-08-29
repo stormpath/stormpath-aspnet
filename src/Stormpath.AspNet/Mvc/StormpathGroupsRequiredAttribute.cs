@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Filters;
 using Stormpath.SDK.Account;
 using Stormpath.SDK.Sync;
+using Stormpath.AspNet;
 
 namespace Stormpath.AspNet.Mvc
 {
@@ -38,38 +39,16 @@ namespace Stormpath.AspNet.Mvc
             }
 
             var account = filterContext.RequestContext.HttpContext.Request.GetStormpathAccount();
-            if (account == null)
-            {
-                filterContext.Result = new HttpUnauthorizedResult("Not Authorized");
-                return;
-            }
 
-            var groupNames = GetGroupNames(account);
-
-            var matchingGroupFound = false;
-
-            foreach (var name in allowedGroupNames)
-            {
-                matchingGroupFound = groupNames.Contains(name, StringComparer.OrdinalIgnoreCase);
-
-                if (matchingGroupFound)
-                {
-                    break;
-                }
-            }
-
-            if (!matchingGroupFound)
+            var requiredGroupsFilter = new RequiredGroupsFilter(allowedGroupNames);
+            var authorized = Task.Run(() => requiredGroupsFilter.IsAuthorized(account)).Result;
+            if (!authorized)
             {
                 filterContext.Result = new HttpUnauthorizedResult("Not Authorized");
                 return;
             }
 
             // At least one group matches; okay to continue!
-        }
-
-        public List<string> GetGroupNames(IAccount account)
-        {
-            return account.GetGroups().Synchronously().ToList().Select(g => g.Name).ToList();
         }
 
         public void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)

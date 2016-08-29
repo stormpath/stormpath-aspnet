@@ -30,21 +30,10 @@ namespace Stormpath.AspNet.Mvc
             }
 
             var account = filterContext.RequestContext.HttpContext.Request.GetStormpathAccount();
-            if (account == null)
-            {
-                filterContext.Result = new HttpUnauthorizedResult("Not Authorized");
-                return;
-            }
 
-            var customData = account.GetCustomData();
-
-            if (customData?[key] == null)
-            {
-                filterContext.Result = new HttpUnauthorizedResult("Not Authorized");
-                return;
-            }
-
-            if (!customData[key].Equals(value))
+            var requiredCustomDataFilter = new RequiredCustomDataFilter(key, value);
+            var authorized = Task.Run(() => requiredCustomDataFilter.IsAuthorized(account)).Result;
+            if (!authorized)
             {
                 filterContext.Result = new HttpUnauthorizedResult("Not Authorized");
                 return;

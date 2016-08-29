@@ -28,21 +28,10 @@ namespace Stormpath.AspNet.WebApi
             }
 
             var account = context.Request.GetStormpathAccount();
-            if (account == null)
-            {
-                context.ErrorResult = new AuthorizationFailureResult("Not Authorized", context.Request);
-                return;
-            }
 
-            var customData = await account.GetCustomDataAsync();
-
-            if (customData?[key] == null)
-            {
-                context.ErrorResult = new AuthorizationFailureResult("Not Authorized", context.Request);
-                return;
-            }
-
-            if (!customData[key].Equals(value))
+            var requiredCustomDataFilter = new RequiredCustomDataFilter(key, value);
+            var authorized = await requiredCustomDataFilter.IsAuthorized(account);
+            if (!authorized)
             {
                 context.ErrorResult = new AuthorizationFailureResult("Not Authorized", context.Request);
                 return;

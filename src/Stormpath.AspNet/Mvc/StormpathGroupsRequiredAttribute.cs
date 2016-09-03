@@ -1,59 +1,53 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.Mvc.Filters;
-using Stormpath.SDK.Account;
-using Stormpath.SDK.Sync;
-using Stormpath.AspNet;
+using Stormpath.Owin.Middleware;
 
 namespace Stormpath.AspNet.Mvc
 {
     /// <summary>
-    /// The functionality of this attribute matches the [Authorize] attribute.  
-    /// You can put multiple groups in a single call.  They will be treated like an "or".  
-    /// If the user matches one of the groups listed, the call will be allowed.
-    /// Use multiple [StormpathGroupsRequired] attributes to create "and" conditions
+    /// Requires the user to be in a Stormpath Group.
     /// </summary>
+    /// <remarks>
+    /// The functionality of this attribute matches <c>AuthorizeAttribute</c>.
+    /// Multiple Groups in a single attribute are treated as an OR.
+    /// Use multiple <c>StormpathGroupsRequiredAttribute</c> to create AND conditions.
+    /// </remarks>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true)]
     public class StormpathGroupsRequiredAttribute : ActionFilterAttribute, IAuthenticationFilter
     {
-        private readonly string[] allowedGroupNames;
+        private readonly string[] _allowedGroupNamesOrHrefs;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StormpathGroupsRequiredAttribute"/> class.
         /// </summary>
-        /// <param name="allowedGroupNames"></param>
-        public StormpathGroupsRequiredAttribute(params string[] allowedGroupNames)
+        /// <param name="allowedNamesorHrefs">The case-sensitive name or <c>href</c> of a Stormpath Group.</param>
+        public StormpathGroupsRequiredAttribute(params string[] allowedNamesorHrefs)
         {
-            this.allowedGroupNames = allowedGroupNames;
+            _allowedGroupNamesOrHrefs = allowedNamesorHrefs;
         }
 
         public void OnAuthentication(AuthenticationContext filterContext)
         {
             if (!filterContext.Principal.Identity.IsAuthenticated)
             {
-                filterContext.Result = new HttpUnauthorizedResult("Not Authorized");
+                filterContext.Result = new HttpUnauthorizedResult();
                 return;
             }
 
             var account = filterContext.RequestContext.HttpContext.Request.GetStormpathAccount();
 
-            var requiredGroupsFilter = new RequiredGroupsFilter(allowedGroupNames);
-            var authorized = Task.Run(() => requiredGroupsFilter.IsAuthorized(account)).Result;
+            var requireGroupsFilter = new RequireGroupsFilter(_allowedGroupNamesOrHrefs);
+            var authorized = requireGroupsFilter.IsAuthorized(account);
+
             if (!authorized)
             {
-                filterContext.Result = new HttpUnauthorizedResult("Not Authorized");
-                return;
+                filterContext.Result = new HttpForbiddenResult();
             }
-
-            // At least one group matches; okay to continue!
         }
 
         public void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
         {
-
         }
 
         public new bool AllowMultiple => true;

@@ -1,49 +1,53 @@
-﻿using Stormpath.SDK;
-using System;
-using System.Linq;
+﻿using System;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http.Filters;
+using Stormpath.Owin.Middleware;
 
 namespace Stormpath.AspNet.WebApi
 {
+    /// <summary>
+    /// Requires a matching Stormpath Custom Data element to be present for the user.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true)]
     public sealed class StormpathCustomDataRequiredAttribute : Attribute, IAuthenticationFilter
     {
-        private readonly string key;
-        private readonly object value;
+        private readonly string _key;
+        private readonly object _value;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StormpathCustomDataRequiredAttribute"/> class.
+        /// </summary>
+        /// <param name="key">The Custom Data key.</param>
+        /// <param name="value">The Custom Data value.</param>
         public StormpathCustomDataRequiredAttribute(string key, object value)
         {
-            this.key = key;
-            this.value = value;
+            _key = key;
+            _value = value;
         }
 
         public async Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
         {
             if (!context.Principal.Identity.IsAuthenticated)
             {
-                context.ErrorResult = new AuthorizationFailureResult("Not Authorized", context.Request);
+                context.ErrorResult = new AuthorizationFailureResult(HttpStatusCode.Unauthorized, "Not authenticated", context.Request);
                 return;
             }
 
             var account = context.Request.GetStormpathAccount();
 
-            var requiredCustomDataFilter = new RequiredCustomDataFilter(key, value);
-            var authorized = await requiredCustomDataFilter.IsAuthorized(account);
+            var requireCustomDataFilter = new RequireCustomDataFilter(_key, _value);
+            var authorized = await requireCustomDataFilter.IsAuthorizedAsync(account, cancellationToken);
+
             if (!authorized)
             {
-                context.ErrorResult = new AuthorizationFailureResult("Not Authorized", context.Request);
-                return;
+                context.ErrorResult = new AuthorizationFailureResult(HttpStatusCode.Forbidden, "Not Authorized", context.Request);
             }
-
-            // The Custom Data matches; okay to continue!
         }
 
         public Task ChallengeAsync(HttpAuthenticationChallengeContext context, CancellationToken cancellationToken)
-        {
-            return Task.FromResult(0);
-        }
+            => Task.FromResult(0);
 
         public bool AllowMultiple => true;
 

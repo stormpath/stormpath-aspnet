@@ -8,21 +8,26 @@ namespace Stormpath.AspNet.WebApi
 {
     public class AuthorizationFailureResult : IHttpActionResult
     {
-        public AuthorizationFailureResult(string reasonPhrase, HttpRequestMessage request)
+        public AuthorizationFailureResult(HttpStatusCode statusCode, string reasonPhrase, HttpRequestMessage request)
         {
+            StatusCode = statusCode;
             ReasonPhrase = reasonPhrase;
             Request = request;
         }
 
-        public string ReasonPhrase { get; private set; }
+        public HttpStatusCode StatusCode { get; }
 
-        public HttpRequestMessage Request { get; private set; }
+        public string ReasonPhrase { get; }
+
+        public HttpRequestMessage Request { get; }
 
         public Task<HttpResponseMessage> ExecuteAsync(CancellationToken cancellationToken)
         {
-            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.Forbidden);
-            response.RequestMessage = Request;
-            response.ReasonPhrase = ReasonPhrase;
+            var response = new HttpResponseMessage(StatusCode)
+            {
+                RequestMessage = Request,
+                ReasonPhrase = ReasonPhrase
+            };
 
             return Task.FromResult(response);
         }

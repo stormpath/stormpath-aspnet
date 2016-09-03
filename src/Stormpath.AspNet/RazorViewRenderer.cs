@@ -90,7 +90,7 @@ namespace Stormpath.AspNet
             var scheme = owinContext.Get<string>(OwinKeys.StormpathUserScheme);
             var account = owinContext.Get<IAccount>(OwinKeys.StormpathUser);
 
-            var handler = new RouteProtector(config.Web, null, null, null, logger);
+            var handler = new RouteProtector(config.Application, config.Web, null, null, null, null, logger);
             var isAuthenticatedRequest = handler.IsAuthenticated(scheme, scheme, account);
 
             if (isAuthenticatedRequest)

@@ -42,7 +42,17 @@ namespace Stormpath.AspNet
                 Configuration = options?.Configuration,
                 ConfigurationFileRoot = AppDomain.CurrentDomain.BaseDirectory,
                 Logger = options?.Logger,
-                CacheProvider = options?.CacheProvider
+                CacheProvider = options?.CacheProvider,
+                PostChangePasswordHandler = options?.PostChangePasswordHandler,
+                PostLoginHandler = options?.PostLoginHandler,
+                PostLogoutHandler = options?.PostLogoutHandler,
+                PostRegistrationHandler = options?.PostRegistrationHandler,
+                PostVerifyEmailHandler = options?.PostVerifyEmailHandler,
+                PreChangePasswordHandler = options?.PreChangePasswordHandler,
+                PreLoginHandler = options?.PreLoginHandler,
+                PreLogoutHandler = options?.PreLogoutHandler,
+                PreRegistrationHandler = options?.PreRegistrationHandler,
+                PreVerifyEmailHandler = options?.PreVerifyEmailHandler,
             });
 
             app.Use(stormpathMiddleware);

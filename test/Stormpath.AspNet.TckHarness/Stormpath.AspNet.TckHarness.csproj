@@ -82,36 +82,36 @@
       <HintPath>..\..\packages\RestSharp.105.2.3\lib\net46\RestSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Stormpath.AspNet, Version=0.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Stormpath.AspNet, Version=0.6.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\src\Stormpath.AspNet\bin\Debug\net45\Stormpath.AspNet.dll</HintPath>
     </Reference>
     <Reference Include="Stormpath.Configuration, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Stormpath.Configuration.6.0.0-beta1\lib\net45\Stormpath.Configuration.dll</HintPath>
+      <HintPath>..\..\packages\Stormpath.Configuration.6.0.0\lib\net45\Stormpath.Configuration.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Stormpath.Configuration.Abstractions, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Stormpath.Configuration.Abstractions.6.0.0-beta1\lib\net45\Stormpath.Configuration.Abstractions.dll</HintPath>
+      <HintPath>..\..\packages\Stormpath.Configuration.Abstractions.6.0.0\lib\net45\Stormpath.Configuration.Abstractions.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Stormpath.Owin.Abstractions, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Stormpath.Owin.Abstractions.1.5.0-beta4\lib\net45\Stormpath.Owin.Abstractions.dll</HintPath>
+      <HintPath>..\..\packages\Stormpath.Owin.Abstractions.1.5.0\lib\net45\Stormpath.Owin.Abstractions.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Stormpath.Owin.Middleware, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Stormpath.Owin.Middleware.2.0.0-beta5\lib\net45\Stormpath.Owin.Middleware.dll</HintPath>
+      <HintPath>..\..\packages\Stormpath.Owin.Middleware.2.0.0\lib\net45\Stormpath.Owin.Middleware.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Stormpath.Owin.Views.Precompiled, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Stormpath.Owin.Views.Precompiled.0.4.1-beta1\lib\net45\Stormpath.Owin.Views.Precompiled.dll</HintPath>
+      <HintPath>..\..\packages\Stormpath.Owin.Views.Precompiled.0.4.1\lib\net45\Stormpath.Owin.Views.Precompiled.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Stormpath.SDK.Abstractions, Version=0.94.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Stormpath.SDK.Abstractions.0.94.0-beta1\lib\net45\Stormpath.SDK.Abstractions.dll</HintPath>
+    <Reference Include="Stormpath.SDK.Abstractions, Version=0.94.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Stormpath.SDK.Abstractions.0.94.1\lib\net45\Stormpath.SDK.Abstractions.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Stormpath.SDK.Core, Version=0.94.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Stormpath.SDK.Core.0.94.0-beta1\lib\net45\Stormpath.SDK.Core.dll</HintPath>
+    <Reference Include="Stormpath.SDK.Core, Version=0.94.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Stormpath.SDK.Core.0.94.1\lib\net45\Stormpath.SDK.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Stormpath.SDK.JsonNetSerializer, Version=0.91.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -119,7 +119,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Stormpath.SDK.RestSharpClient, Version=0.94.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Stormpath.SDK.RestSharpClient.0.94.0-beta1\lib\net45\Stormpath.SDK.RestSharpClient.dll</HintPath>
+      <HintPath>..\..\packages\Stormpath.SDK.RestSharpClient.0.94.0\lib\net45\Stormpath.SDK.RestSharpClient.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

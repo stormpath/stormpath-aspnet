@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using System.Web.Http;
+using Stormpath.AspNet.WebApi;
 
 namespace Stormpath.AspNet.TckHarness.Controllers
 {

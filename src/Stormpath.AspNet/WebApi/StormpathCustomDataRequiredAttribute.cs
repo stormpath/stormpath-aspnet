@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace Stormpath.AspNet.WebApi
     {
         private readonly string _key;
         private readonly object _value;
+        private readonly IEqualityComparer<object> _comparer;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StormpathCustomDataRequiredAttribute"/> class.
@@ -22,9 +24,21 @@ namespace Stormpath.AspNet.WebApi
         /// <param name="key">The Custom Data key.</param>
         /// <param name="value">The Custom Data value.</param>
         public StormpathCustomDataRequiredAttribute(string key, object value)
+            : this(key, value, null)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StormpathCustomDataRequiredAttribute"/> class.
+        /// </summary>
+        /// <param name="key">The Custom Data key.</param>
+        /// <param name="value">The Custom Data value.</param>
+        /// <param name="comparer">The comparer to use when comparing Custom Data values.</param>
+        public StormpathCustomDataRequiredAttribute(string key, object value, IEqualityComparer<object> comparer)
         {
             _key = key;
             _value = value;
+            _comparer = comparer;
         }
 
         public async Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
@@ -37,7 +51,10 @@ namespace Stormpath.AspNet.WebApi
 
             var account = context.Request.GetStormpathAccount();
 
-            var requireCustomDataFilter = new RequireCustomDataFilter(_key, _value);
+            // TODO simplify this
+            var requireCustomDataFilter = _comparer == null
+                ? new RequireCustomDataFilter(_key, _value)
+                : new RequireCustomDataFilter(_key, _value, _comparer);
             var authorized = await requireCustomDataFilter.IsAuthorizedAsync(account, cancellationToken);
 
             if (!authorized)

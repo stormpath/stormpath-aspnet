@@ -51,10 +51,7 @@ namespace Stormpath.AspNet.WebApi
 
             var account = context.Request.GetStormpathAccount();
 
-            // TODO simplify this
-            var requireCustomDataFilter = _comparer == null
-                ? new RequireCustomDataFilter(_key, _value)
-                : new RequireCustomDataFilter(_key, _value, _comparer);
+            var requireCustomDataFilter = new RequireCustomDataFilter(_key, _value, _comparer);
             var authorized = await requireCustomDataFilter.IsAuthorizedAsync(account, cancellationToken);
 
             if (!authorized)

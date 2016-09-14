@@ -49,10 +49,7 @@ namespace Stormpath.AspNet.Mvc
 
             var account = filterContext.RequestContext.HttpContext.Request.GetStormpathAccount();
 
-            // TODO simplify this
-            var requireCustomDataFilter = _comparer == null
-                ? new RequireCustomDataFilter(_key, _value)
-                : new RequireCustomDataFilter(_key, _value, _comparer);
+            var requireCustomDataFilter = new RequireCustomDataFilter(_key, _value, _comparer);
             var authorized = requireCustomDataFilter.IsAuthorized(account);
 
             if (!authorized)

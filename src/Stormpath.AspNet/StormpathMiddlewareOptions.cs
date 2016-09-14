@@ -1,4 +1,5 @@
-﻿using Stormpath.SDK.Logging;
+﻿using Stormpath.SDK.Cache;
+using Stormpath.SDK.Logging;
 
 namespace Stormpath.AspNet
 {
@@ -7,5 +8,7 @@ namespace Stormpath.AspNet
         public object Configuration { get; set; }
 
         public ILogger Logger { get; set; }
+
+        public ICacheProviderBuilder CacheProvider { get; set; }
     }
 }

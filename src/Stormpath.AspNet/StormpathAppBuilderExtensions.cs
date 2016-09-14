@@ -42,6 +42,7 @@ namespace Stormpath.AspNet
                 Configuration = options?.Configuration,
                 ConfigurationFileRoot = AppDomain.CurrentDomain.BaseDirectory,
                 Logger = options?.Logger,
+                CacheProvider = options?.CacheProvider
             });
 
             app.Use(stormpathMiddleware);

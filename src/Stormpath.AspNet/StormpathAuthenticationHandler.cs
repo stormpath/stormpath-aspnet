@@ -9,6 +9,7 @@ using Stormpath.Owin.Abstractions;
 using Stormpath.Owin.Abstractions.Configuration;
 using Stormpath.Owin.Middleware;
 using Stormpath.SDK.Account;
+using Stormpath.SDK.Client;
 using Stormpath.SDK.Logging;
 
 namespace Stormpath.AspNet
@@ -18,14 +19,17 @@ namespace Stormpath.AspNet
         private readonly SDK.Logging.ILogger _stormpathLogger;
         private readonly RouteProtector _protector;
 
-        public StormpathAuthenticationHandler(IntegrationConfiguration configuration, SDK.Logging.ILogger stormpathLogger)
+        public StormpathAuthenticationHandler(
+            IClient client,
+            IntegrationConfiguration configuration
+            , SDK.Logging.ILogger stormpathLogger)
         {
             _stormpathLogger = stormpathLogger;
 
-            _protector = CreateRouteProtector(configuration);
+            _protector = CreateRouteProtector(client, configuration);
         }
 
-        private RouteProtector CreateRouteProtector(IntegrationConfiguration configuration)
+        private RouteProtector CreateRouteProtector(IClient client, IntegrationConfiguration configuration)
         {
             var deleteCookieAction = new Action<WebCookieConfiguration>(cookie =>
             {
@@ -41,8 +45,8 @@ namespace Stormpath.AspNet
             var redirectAction = new Action<string>(location => Response.Redirect(location));
 
             return new RouteProtector(
-                configuration.Application,
-                configuration.Web,
+                client,
+                configuration,
                 deleteCookieAction,
                 setStatusCodeAction,
                 setHeaderAction,

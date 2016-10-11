@@ -58,6 +58,7 @@ namespace Stormpath.AspNet
             app.Use(stormpathMiddleware);
 
             app.Use<StormpathAuthenticationMiddleware>(
+                stormpathMiddleware.GetClient(),
                 new StormpathAuthenticationOptions() { AllowedAuthenticationSchemes = new[] { "Cookie", "Bearer" } },
                 stormpathMiddleware.Configuration,
                 options?.Logger);

@@ -25,6 +25,8 @@ namespace Stormpath.AspNet.TckHarness
         private readonly string _path;
         private readonly LogLevel _severity;
 
+        private readonly object _lock = new object();
+
         public FileLogger(string path, LogLevel severity)
         {
             _path = path;
@@ -55,7 +57,10 @@ namespace Stormpath.AspNet.TckHarness
 
             logBuilder.Append("\n");
 
-            File.AppendAllText(_path, logBuilder.ToString());
+            lock (_lock)
+            {
+                File.AppendAllText(_path, logBuilder.ToString());
+            }
         }
     }
 }

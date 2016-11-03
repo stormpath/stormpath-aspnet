@@ -70,7 +70,7 @@ namespace Stormpath.AspNet
 
         private static string GetLibraryUserAgent()
         {
-            var libraryVersion = typeof(StormpathMiddleware).Assembly.GetName().Version;
+            var libraryVersion = typeof(StormpathAuthenticationMiddleware).Assembly.GetName().Version;
             var libraryToken = $"stormpath-aspnet/{libraryVersion.Major}.{libraryVersion.Minor}.{libraryVersion.Build}";
 
             var hostToken = $"aspnet/{Environment.Version}";

@@ -98,12 +98,12 @@
       <HintPath>..\..\packages\Stormpath.Owin.Abstractions.1.7.1\lib\net45\Stormpath.Owin.Abstractions.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Stormpath.Owin.Middleware, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Stormpath.Owin.Middleware.3.1.0\lib\net45\Stormpath.Owin.Middleware.dll</HintPath>
+    <Reference Include="Stormpath.Owin.Middleware, Version=3.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Stormpath.Owin.Middleware.3.1.1\lib\net45\Stormpath.Owin.Middleware.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Stormpath.Owin.Views.Precompiled, Version=0.4.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Stormpath.Owin.Views.Precompiled.0.4.2\lib\net45\Stormpath.Owin.Views.Precompiled.dll</HintPath>
+    <Reference Include="Stormpath.Owin.Views.Precompiled, Version=0.4.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Stormpath.Owin.Views.Precompiled.0.4.3\lib\net45\Stormpath.Owin.Views.Precompiled.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Stormpath.SDK.Abstractions, Version=0.95.0.0, Culture=neutral, processorArchitecture=MSIL">

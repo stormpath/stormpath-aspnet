@@ -188,11 +188,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller_Mvc_Authorization.cs" />
     <Compile Include="Controller_RequestObjects.cs" />
-    <Compile Include="Controller_Authentication.cs" />
+    <Compile Include="Controller_Api_Authorization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup_Configuration.cs" />
     <Compile Include="Startup_EmailVerification.cs" />
+    <Compile Include="Startup_IdSite.cs" />
     <Compile Include="Startup_Login.cs" />
     <Compile Include="Startup_Logout.cs" />
     <Compile Include="Startup_Me.cs" />

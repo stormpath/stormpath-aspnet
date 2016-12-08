@@ -54,4 +54,29 @@ namespace Stormpath.AspNet.DocExamples
         }
     }
     #endregion
+
+    #region code/authorization/aspnet/require_customData.cs
+    [Authorize]
+    [StormpathCustomDataRequired("canPost", true)]
+    public class CreatePostController : Controller
+    {
+        public ActionResult Index()
+        {
+            return View();
+        }
+    }
+    #endregion
+
+    #region code/authorization/aspnet/require_multiple_customData.cs
+    [Authorize]
+    [StormpathCustomDataRequired("canPost", true)]
+    [StormpathCustomDataRequired("userType", "admin")]
+    public class CreateStickyPostController : Controller
+    {
+        public ActionResult Index()
+        {
+            return View();
+        }
+    }
+    #endregion
 }

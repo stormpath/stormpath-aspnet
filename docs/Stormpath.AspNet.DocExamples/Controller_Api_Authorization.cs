@@ -2,7 +2,7 @@
 
 namespace Stormpath.AspNet.DocExamples
 {
-    #region code/authentication/aspnet/protected_route.cs
+    #region code/authorization/aspnet/protected_route.cs
     // Will require a logged-in user for the routes in this controller
     [Authorize]
     public class SecretController : ApiController
@@ -12,13 +12,6 @@ namespace Stormpath.AspNet.DocExamples
         {
             return "secret!";
         }
-
-        // POST api/<controller>
-        public void Post([FromBody]string value)
-        {
-            // do something
-        }
-
     }
     #endregion
 }

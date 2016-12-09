@@ -24,7 +24,7 @@ namespace Stormpath.AspNet.DocExamples
 
         #region code/registration/postregistration_handler_method.cs
         private Task MyPostRegistrationHandler(
-            PreRegistrationContext context,
+            PostRegistrationContext context,
             CancellationToken ct)
         {
             return Task.FromResult(0);
@@ -54,7 +54,7 @@ namespace Stormpath.AspNet.DocExamples
                 #region code/registration/postregistration_add_group.cs
                 PostRegistrationHandler = async (ctx, ct) =>
                 {
-                    await ctx.Account.AddGroupAsync("customers", ct);
+                    await ctx.Account.AddGroupAsync("rebels", ct);
                 }
                 #endregion
             });

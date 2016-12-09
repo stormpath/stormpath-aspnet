@@ -199,6 +199,8 @@
     <Compile Include="Startup_Logout.cs" />
     <Compile Include="Startup_Me.cs" />
     <Compile Include="Startup_PostLogin.cs" />
+    <Compile Include="Startup_PostRegistration.cs" />
+    <Compile Include="Startup_PreRegistration.cs" />
     <Compile Include="Startup_PreLogin.cs" />
     <Compile Include="Startup_ViewTemplates.cs" />
     <Compile Include="Startup_Oauth2.cs" />

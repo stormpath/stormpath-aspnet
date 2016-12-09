@@ -200,6 +200,8 @@
     <Compile Include="Startup_Me.cs" />
     <Compile Include="Startup_PostLogin.cs" />
     <Compile Include="Startup_PostLogout.cs" />
+    <Compile Include="Startup_PostVerify.cs" />
+    <Compile Include="Startup_PreVerify.cs" />
     <Compile Include="Startup_PreLogout.cs" />
     <Compile Include="Startup_PostRegistration.cs" />
     <Compile Include="Startup_PreRegistration.cs" />

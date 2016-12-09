@@ -7,7 +7,7 @@ namespace Stormpath.AspNet.DocExamples
 {
     public class Controller_RequestObjects : ApiController
     {
-        #region code/request_objects/aspnet/extension_methods.cs
+        #region code/request_context/aspnet/extension_methods.cs
         public IHttpActionResult Get()
         {
             var client = Request.GetStormpathClient();
@@ -20,7 +20,7 @@ namespace Stormpath.AspNet.DocExamples
         }
         #endregion
 
-        #region code/request_objects/aspnet/injecting_application.cs
+        #region code/request_context/aspnet/injecting_application.cs
         [HttpGet]
         public async Task<IHttpActionResult> FindAccountByEmail(string email)
         {
@@ -41,7 +41,7 @@ namespace Stormpath.AspNet.DocExamples
         }
         #endregion
 
-        #region code/request_objects/aspnet/update_user_password.cs
+        #region code/request_context/aspnet/update_user_password.cs
         [HttpPost]
         [Authorize]
         public async Task<IHttpActionResult> UpdatePassword(string newPassword)

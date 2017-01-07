@@ -132,5 +132,18 @@ namespace Stormpath.AspNet.DocExamples
             });
             #endregion
         }
+
+        public void Configuration_BaseUrl(IAppBuilder app)
+        {
+            #region code/configuration/aspnet/stormpath_baseurl.cs
+            app.UseStormpath(new StormpathConfiguration()
+            {
+                Client = new ClientConfiguration()
+                {
+                    BaseUrl = "https://enterprise.stormpath.io/v1"
+                }
+            });
+            #endregion
+        }
     }
 }

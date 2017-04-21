@@ -3,6 +3,7 @@ using System.IO;
 using System.Text;
 using Microsoft.Extensions.Logging;
 using Owin;
+using Stormpath.Configuration.Abstractions;
 
 namespace Stormpath.AspNet.TckHarness
 {
@@ -12,8 +13,19 @@ namespace Stormpath.AspNet.TckHarness
         {
             var logPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "StormpathMiddleware.log");
 
+            var stormpathConfiguration = new StormpathConfiguration
+            {
+                Org = "https://dev-123456.oktapreview.com",
+                ApiToken = "your_api_token",
+                Application = new OktaApplicationConfiguration
+                {
+                    Id = "abcd12345"
+                }
+            };
+
             app.UseStormpath(new StormpathMiddlewareOptions()
             {
+                Configuration = stormpathConfiguration,
                 Logger = new FileLogger(logPath, LogLevel.Trace)
             });
         }

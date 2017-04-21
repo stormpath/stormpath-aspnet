@@ -1,6 +1,4 @@
-﻿using Stormpath.SDK;
-using System;
-using System.Linq;
+﻿using System;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -31,23 +29,25 @@ namespace Stormpath.AspNet.WebApi
             _allowedGroupNamesOrHrefs = allowedNamesorHrefs;
         }
 
-        public async Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
+        public Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
         {
             if (!context.Principal.Identity.IsAuthenticated)
             {
                 context.ErrorResult = new AuthorizationFailureResult(HttpStatusCode.Unauthorized, "Not authenticated", context.Request);
-                return;
+                return Task.FromResult(0);
             }
 
             var account = context.Request.GetStormpathAccount();
 
             var requireGroupsFilter = new RequireGroupsFilter(_allowedGroupNamesOrHrefs);
-            var authorized = await requireGroupsFilter.IsAuthorizedAsync(account, cancellationToken);
+            var authorized = requireGroupsFilter.IsAuthorized(account);
 
             if (!authorized)
             {
                 context.ErrorResult = new AuthorizationFailureResult(HttpStatusCode.Forbidden, "Not Authorized", context.Request);
             }
+
+            return Task.FromResult(0);
         }
 
         public Task ChallengeAsync(HttpAuthenticationChallengeContext context, CancellationToken cancellationToken)

@@ -1,19 +1,24 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C9C891A0-8043-4EAF-9DF1-39ACD3EFA488}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Stormpath.AspNet", "src\Stormpath.AspNet\Stormpath.AspNet.xproj", "{869166A9-F474-46DB-B06B-FD9922674D38}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{1A140068-0DEB-471A-97E3-3AFBD0EB9FE1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stormpath.AspNet.TckHarness", "test\Stormpath.AspNet.TckHarness\Stormpath.AspNet.TckHarness.csproj", "{42CED7DE-0739-47EF-9089-1FA85347E124}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{6D732EF3-2AFE-482D-9EE3-C88C8907D755}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stormpath.AspNet", "src\Stormpath.AspNet\Stormpath.AspNet.csproj", "{869166A9-F474-46DB-B06B-FD9922674D38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stormpath.AspNet.TckHarness", "test\Stormpath.AspNet.TckHarness\Stormpath.AspNet.TckHarness.csproj", "{42CED7DE-0739-47EF-9089-1FA85347E124}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stormpath.AspNet.DocExamples", "docs\Stormpath.AspNet.DocExamples\Stormpath.AspNet.DocExamples.csproj", "{DF2E96E0-169B-4F69-B92A-A9CC30CAE2C2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{584D2977-BBEB-4508-B996-9164E06BA8BF}"
+	ProjectSection(SolutionItems) = preProject
+		build.cake = build.cake
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

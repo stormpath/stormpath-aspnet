@@ -7,7 +7,7 @@ namespace Stormpath.AspNet.TckHarness.Controllers
     {
         public string Index()
         {
-            return Request.GetStormpathConfiguration().Application.Name;
+            return Request.GetStormpathConfiguration().Application.Id;
         }
     }
 }

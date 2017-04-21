@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Infrastructure;
@@ -8,28 +9,24 @@ using Stormpath.Configuration.Abstractions.Immutable;
 using Stormpath.Owin.Abstractions;
 using Stormpath.Owin.Abstractions.Configuration;
 using Stormpath.Owin.Middleware;
-using Stormpath.SDK.Account;
-using Stormpath.SDK.Client;
-using Stormpath.SDK.Logging;
 
 namespace Stormpath.AspNet
 {
     public sealed class StormpathAuthenticationHandler : AuthenticationHandler<StormpathAuthenticationOptions>
     {
-        private readonly SDK.Logging.ILogger _stormpathLogger;
+        private readonly ILogger _logger;
         private readonly RouteProtector _protector;
 
         public StormpathAuthenticationHandler(
-            IClient client,
-            IntegrationConfiguration configuration
-            , SDK.Logging.ILogger stormpathLogger)
+            IntegrationConfiguration configuration,
+            ILogger logger)
         {
-            _stormpathLogger = stormpathLogger;
+            _logger = logger;
 
-            _protector = CreateRouteProtector(client, configuration);
+            _protector = CreateRouteProtector(configuration);
         }
 
-        private RouteProtector CreateRouteProtector(IClient client, IntegrationConfiguration configuration)
+        private RouteProtector CreateRouteProtector(IntegrationConfiguration configuration)
         {
             var deleteCookieAction = new Action<WebCookieConfiguration>(cookie =>
             {
@@ -45,19 +42,18 @@ namespace Stormpath.AspNet
             var redirectAction = new Action<string>(location => Response.Redirect(location));
 
             return new RouteProtector(
-                client,
                 configuration,
                 deleteCookieAction,
                 setStatusCodeAction,
                 setHeaderAction,
                 redirectAction,
-                _stormpathLogger);
+                _logger);
         }
 
         protected override Task<AuthenticationTicket> AuthenticateCoreAsync()
         {
             var scheme = Context.Get<string>(OwinKeys.StormpathUserScheme);
-            var account = Context.Get<IAccount>(OwinKeys.StormpathUser);
+            var account = Context.Get<ICompatibleOktaAccount>(OwinKeys.StormpathUser);
 
             if (Options.AllowedAuthenticationSchemes.Any(potentialScheme => _protector.IsAuthenticated(scheme, potentialScheme, account)))
             {
@@ -66,7 +62,7 @@ namespace Stormpath.AspNet
                 return Task.FromResult(ticket);
             }
 
-            _stormpathLogger.Trace("Request is not authenticated", source: nameof(StormpathAuthenticationHandler));
+            _logger.LogTrace("Request is not authenticated", nameof(StormpathAuthenticationHandler));
             return Task.FromResult<AuthenticationTicket>(null);
         }
 

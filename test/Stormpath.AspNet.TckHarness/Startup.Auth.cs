@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using Microsoft.Extensions.Logging;
 using Owin;
 using Stormpath.Configuration.Abstractions;
-using Stormpath.SDK.Logging;
 
 namespace Stormpath.AspNet.TckHarness
 {
@@ -13,8 +13,19 @@ namespace Stormpath.AspNet.TckHarness
         {
             var logPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "StormpathMiddleware.log");
 
+            var stormpathConfiguration = new StormpathConfiguration
+            {
+                Org = "https://dev-123456.oktapreview.com",
+                ApiToken = "your_api_token",
+                Application = new OktaApplicationConfiguration
+                {
+                    Id = "abcd12345"
+                }
+            };
+
             app.UseStormpath(new StormpathMiddlewareOptions()
             {
+                Configuration = stormpathConfiguration,
                 Logger = new FileLogger(logPath, LogLevel.Trace)
             });
         }
@@ -33,29 +44,25 @@ namespace Stormpath.AspNet.TckHarness
             _severity = severity;
         }
 
-        public void Log(LogEntry entry)
+        public IDisposable BeginScope<TState>(TState state)
         {
-            if (entry.Severity < _severity)
+            throw new NotImplementedException();
+        }
+
+        public bool IsEnabled(LogLevel logLevel) => true;
+
+        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+        {
+            if (logLevel < _severity)
             {
                 return;
             }
 
             var logBuilder = new StringBuilder()
-                .Append($"[{entry.Severity}] {entry.Source}: ");
+                .Append($"[{logLevel}] {eventId}: ");
 
-            if (entry.Exception != null)
-            {
-                logBuilder.Append($"Exception {entry.Exception.GetType().Name} \"{entry.Exception.Message}\" in {entry.Exception.Source} ");
-            }
-
-            bool isMessageUseful = !string.IsNullOrEmpty(entry.Message)
-                                   && !entry.Message.Equals(entry.Exception?.Message, StringComparison.Ordinal);
-            if (isMessageUseful)
-            {
-                logBuilder.Append($"\"{entry.Message}\"");
-            }
-
-            logBuilder.Append("\n");
+            var message = formatter(state, exception);
+            logBuilder.AppendLine(message);
 
             lock (_lock)
             {

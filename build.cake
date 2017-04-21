@@ -30,7 +30,7 @@ Task("Build")
 Task("Pack")
 .Does(() =>
 {
-    var projects = GetFiles("./src/**/*csproj.json");
+    var projects = GetFiles("./src/**/*.csproj");
     Console.WriteLine("Packing {0} projects", projects.Count());
 
     foreach (var project in projects)

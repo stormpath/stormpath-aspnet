@@ -15,6 +15,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stormpath.AspNet.TckHarness
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stormpath.AspNet.DocExamples", "docs\Stormpath.AspNet.DocExamples\Stormpath.AspNet.DocExamples.csproj", "{DF2E96E0-169B-4F69-B92A-A9CC30CAE2C2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{584D2977-BBEB-4508-B996-9164E06BA8BF}"
+	ProjectSection(SolutionItems) = preProject
+		build.cake = build.cake
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

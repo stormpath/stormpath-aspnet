@@ -42,7 +42,6 @@ namespace Stormpath.AspNet
                 Configuration = options?.Configuration,
                 ConfigurationFileRoot = AppDomain.CurrentDomain.BaseDirectory,
                 Logger = options?.Logger,
-                CacheProvider = options?.CacheProvider,
                 PostChangePasswordHandler = options?.PostChangePasswordHandler,
                 PostLoginHandler = options?.PostLoginHandler,
                 PostLogoutHandler = options?.PostLogoutHandler,
@@ -53,12 +52,12 @@ namespace Stormpath.AspNet
                 PreLogoutHandler = options?.PreLogoutHandler,
                 PreRegistrationHandler = options?.PreRegistrationHandler,
                 PreVerifyEmailHandler = options?.PreVerifyEmailHandler,
+                SendVerificationEmailHandler = options?.SendVerificationEmailHandler
             });
 
             app.Use(stormpathMiddleware);
 
             app.Use<StormpathAuthenticationMiddleware>(
-                stormpathMiddleware.GetClient(),
                 new StormpathAuthenticationOptions() { AllowedAuthenticationSchemes = new[] { "Cookie", "Bearer" } },
                 stormpathMiddleware.Configuration,
                 options?.Logger);

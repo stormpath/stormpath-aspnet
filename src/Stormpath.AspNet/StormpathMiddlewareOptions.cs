@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Stormpath.Owin.Middleware;
-using Stormpath.SDK.Cache;
-using Stormpath.SDK.Logging;
 
 namespace Stormpath.AspNet
 {
@@ -12,8 +11,6 @@ namespace Stormpath.AspNet
         public object Configuration { get; set; }
 
         public ILogger Logger { get; set; }
-
-        public ICacheProviderBuilder CacheProvider { get; set; }
 
         public Func<PreChangePasswordContext, CancellationToken, Task> PreChangePasswordHandler { get; set; }
 
@@ -34,5 +31,7 @@ namespace Stormpath.AspNet
         public Func<PreVerifyEmailContext, CancellationToken, Task> PreVerifyEmailHandler { get; set; }
 
         public Func<PostVerifyEmailContext, CancellationToken, Task> PostVerifyEmailHandler { get; set; }
+
+        public Func<SendVerificationEmailContext, CancellationToken, Task> SendVerificationEmailHandler { get; set; }
     }
 }

@@ -41,23 +41,25 @@ namespace Stormpath.AspNet.WebApi
             _comparer = comparer;
         }
 
-        public async Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
+        public Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
         {
             if (!context.Principal.Identity.IsAuthenticated)
             {
                 context.ErrorResult = new AuthorizationFailureResult(HttpStatusCode.Unauthorized, "Not authenticated", context.Request);
-                return;
+                return Task.FromResult(0);
             }
 
             var account = context.Request.GetStormpathAccount();
 
             var requireCustomDataFilter = new RequireCustomDataFilter(_key, _value, _comparer);
-            var authorized = await requireCustomDataFilter.IsAuthorizedAsync(account, cancellationToken);
+            var authorized = requireCustomDataFilter.IsAuthorized(account);
 
             if (!authorized)
             {
                 context.ErrorResult = new AuthorizationFailureResult(HttpStatusCode.Forbidden, "Not Authorized", context.Request);
             }
+
+            return Task.FromResult(0);
         }
 
         public Task ChallengeAsync(HttpAuthenticationChallengeContext context, CancellationToken cancellationToken)

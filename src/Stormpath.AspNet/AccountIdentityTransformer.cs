@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Security.Claims;
-using Stormpath.SDK.Account;
+using Stormpath.Owin.Abstractions;
 
 namespace Stormpath.AspNet
 {
     public static class AccountIdentityTransformer
     {
-        public static ClaimsPrincipal CreatePrincipal(IAccount account, string scheme)
+        public static ClaimsPrincipal CreatePrincipal(ICompatibleOktaAccount account, string scheme)
         {
             var identity = CreateIdentity(account, scheme);
 
@@ -15,7 +15,7 @@ namespace Stormpath.AspNet
                 : new ClaimsPrincipal(identity);
         }
 
-        public static ClaimsIdentity CreateIdentity(IAccount account, string scheme)
+        public static ClaimsIdentity CreateIdentity(ICompatibleOktaAccount account, string scheme)
         {
             if (account == null)
             {

@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Microsoft.Extensions.Logging;
 using Stormpath.Configuration.Abstractions.Immutable;
 using Stormpath.Owin.Abstractions;
+using Stormpath.Owin.Abstractions.Configuration;
 using Stormpath.Owin.Middleware;
-using Stormpath.SDK.Account;
-using Stormpath.SDK.Client;
-using Stormpath.SDK.Logging;
 
 namespace Stormpath.AspNet
 {
@@ -33,7 +32,7 @@ namespace Stormpath.AspNet
             var httpContext = context.Request[HttpContextKey] as HttpContextWrapper;
             if (httpContext == null)
             {
-                _logger.Error($"Request did not include item '{HttpContextKey}'", nameof(RazorViewRenderer));
+                _logger.LogError($"Request did not include item '{HttpContextKey}'", nameof(RazorViewRenderer));
                 return Task.FromResult(false);
             }
 
@@ -63,7 +62,7 @@ namespace Stormpath.AspNet
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, null, nameof(RazorViewRenderer));
+                _logger.LogError(1000, ex, null, nameof(RazorViewRenderer));
                 return Task.FromResult(false);
             }
         }
@@ -74,7 +73,7 @@ namespace Stormpath.AspNet
 
             if (viewEngineResult?.View == null)
             {
-                logger.Trace($"Could not find Razor view '{path}'", nameof(RazorViewRenderer));
+                logger.LogTrace($"Could not find Razor view '{path}'", nameof(RazorViewRenderer));
                 return null;
             }
 
@@ -87,12 +86,11 @@ namespace Stormpath.AspNet
         private static void GetUserIdentity(HttpContextBase httpContext, ILogger logger)
         {
             var owinContext = httpContext.GetOwinContext();
-            var client = owinContext.Get<IClient>(OwinKeys.StormpathClient);
-            var config = owinContext.Get<StormpathConfiguration>(OwinKeys.StormpathConfiguration);
+            var config = owinContext.Get<IntegrationConfiguration>(OwinKeys.StormpathConfiguration);
             var scheme = owinContext.Get<string>(OwinKeys.StormpathUserScheme);
-            var account = owinContext.Get<IAccount>(OwinKeys.StormpathUser);
+            var account = owinContext.Get<ICompatibleOktaAccount>(OwinKeys.StormpathUser);
 
-            var handler = new RouteProtector(client, config, null, null, null, null, logger);
+            var handler = new RouteProtector(config, null, null, null, null, logger);
             var isAuthenticatedRequest = handler.IsAuthenticated(scheme, scheme, account);
 
             if (isAuthenticatedRequest)

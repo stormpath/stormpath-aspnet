@@ -35,7 +35,6 @@ namespace Stormpath.AspNet.TckHarness
     {
         private readonly string _path;
         private readonly LogLevel _severity;
-
         private readonly object _lock = new object();
 
         public FileLogger(string path, LogLevel severity)
@@ -49,15 +48,10 @@ namespace Stormpath.AspNet.TckHarness
             throw new NotImplementedException();
         }
 
-        public bool IsEnabled(LogLevel logLevel) => true;
+        public bool IsEnabled(LogLevel logLevel) => logLevel <= _severity;
 
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
         {
-            if (logLevel < _severity)
-            {
-                return;
-            }
-
             var logBuilder = new StringBuilder()
                 .Append($"[{logLevel}] {eventId}: ");
 

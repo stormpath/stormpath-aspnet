@@ -82,10 +82,6 @@
       <HintPath>..\..\packages\RestSharp.105.2.3\lib\net46\RestSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Stormpath.AspNet, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\src\Stormpath.AspNet\bin\Debug\net45\Stormpath.AspNet.dll</HintPath>
-    </Reference>
     <Reference Include="Stormpath.Configuration, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Stormpath.Configuration.6.0.0\lib\net45\Stormpath.Configuration.dll</HintPath>
       <Private>True</Private>
@@ -275,6 +271,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Stormpath.AspNet\Stormpath.AspNet.csproj">
+      <Project>{869166a9-f474-46db-b06b-fd9922674d38}</Project>
+      <Name>Stormpath.AspNet</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

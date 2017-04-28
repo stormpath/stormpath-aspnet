@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Filters;
+using Stormpath.Owin.Abstractions;
 using Stormpath.Owin.Middleware;
 
 namespace Stormpath.AspNet.Mvc
@@ -36,8 +38,10 @@ namespace Stormpath.AspNet.Mvc
             }
 
             var account = filterContext.RequestContext.HttpContext.Request.GetStormpathAccount();
+            var filterFactory = filterContext.RequestContext.HttpContext
+                .GetOwinContext().Get<IAuthorizationFilterFactory>(OwinKeys.StormpathAuthorizationFilterFactory);
 
-            var requireGroupsFilter = new RequireGroupsFilter(_allowedGroupNamesOrHrefs);
+            var requireGroupsFilter = filterFactory.CreateGroupFilter(_allowedGroupNamesOrHrefs);
             var authorized = requireGroupsFilter.IsAuthorized(account);
 
             if (!authorized)

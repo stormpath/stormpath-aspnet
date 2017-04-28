@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Filters;
+using Stormpath.Owin.Abstractions;
 using Stormpath.Owin.Middleware;
 
 namespace Stormpath.AspNet.Mvc
@@ -48,8 +50,10 @@ namespace Stormpath.AspNet.Mvc
             }
 
             var account = filterContext.RequestContext.HttpContext.Request.GetStormpathAccount();
+            var filterFactory = filterContext.RequestContext.HttpContext
+                .GetOwinContext().Get<IAuthorizationFilterFactory>(OwinKeys.StormpathAuthorizationFilterFactory);
 
-            var requireCustomDataFilter = new RequireCustomDataFilter(_key, _value, _comparer);
+            var requireCustomDataFilter = filterFactory.CreateCustomDataFilter(_key, _value, _comparer);
             var authorized = requireCustomDataFilter.IsAuthorized(account);
 
             if (!authorized)

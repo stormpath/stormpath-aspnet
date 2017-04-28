@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Net;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http.Filters;
+using Stormpath.Owin.Abstractions;
 using Stormpath.Owin.Middleware;
 
 namespace Stormpath.AspNet.WebApi
@@ -38,8 +40,10 @@ namespace Stormpath.AspNet.WebApi
             }
 
             var account = context.Request.GetStormpathAccount();
+            var filterFactory = context.Request
+                .GetOwinContext().Get<IAuthorizationFilterFactory>(OwinKeys.StormpathAuthorizationFilterFactory);
 
-            var requireGroupsFilter = new RequireGroupsFilter(_allowedGroupNamesOrHrefs);
+            var requireGroupsFilter = filterFactory.CreateGroupFilter(_allowedGroupNamesOrHrefs);
             var authorized = requireGroupsFilter.IsAuthorized(account);
 
             if (!authorized)

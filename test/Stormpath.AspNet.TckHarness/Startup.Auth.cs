@@ -20,6 +20,17 @@ namespace Stormpath.AspNet.TckHarness
                 Application = new OktaApplicationConfiguration
                 {
                     Id = "abcd12345"
+                },
+                Web = new WebConfiguration
+                {
+                    ChangePassword = new WebChangePasswordRouteConfiguration
+                    {
+                        Enabled = true
+                    },
+                    ForgotPassword = new WebForgotPasswordRouteConfiguration
+                    {
+                        Enabled = true
+                    }
                 }
             };
 

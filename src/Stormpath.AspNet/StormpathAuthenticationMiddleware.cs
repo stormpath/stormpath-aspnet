@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Infrastructure;
 using Stormpath.Owin.Abstractions.Configuration;
@@ -34,7 +35,7 @@ namespace Stormpath.AspNet
             }
 
             _configuration = configuration;
-            _logger = logger;
+            _logger = logger ?? NullLogger.Instance;
         }
 
         // Called for each request, to create a handler for each request.

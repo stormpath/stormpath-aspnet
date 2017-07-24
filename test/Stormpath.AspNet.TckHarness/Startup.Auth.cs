@@ -15,14 +15,18 @@ namespace Stormpath.AspNet.TckHarness
 
             var stormpathConfiguration = new StormpathConfiguration
             {
+                // Replace with your Okta Base URL:
                 Org = "https://dev-123456.oktapreview.com",
+                // Replace with your Okta API token:
                 ApiToken = "your_api_token",
                 Application = new OktaApplicationConfiguration
                 {
+                    // Replace with your Okta migrated Application ID:
                     Id = "abcd12345"
                 },
                 Web = new WebConfiguration
                 {
+                    ServerUri = "http://localhost:8080",
                     ChangePassword = new WebChangePasswordRouteConfiguration
                     {
                         Enabled = true

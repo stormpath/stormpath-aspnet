@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using Stormpath.Owin.Middleware;
 
 namespace Stormpath.AspNet
@@ -10,7 +11,7 @@ namespace Stormpath.AspNet
     {
         public object Configuration { get; set; }
 
-        public ILogger Logger { get; set; }
+        public ILogger Logger { get; set; } = NullLogger.Instance;
 
         public Func<PreChangePasswordContext, CancellationToken, Task> PreChangePasswordHandler { get; set; }
 

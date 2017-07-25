@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Owin.Extensions;
 using Owin;
 using Stormpath.Configuration.Abstractions;
@@ -31,9 +32,11 @@ namespace Stormpath.AspNet
                 throw new ArgumentNullException(nameof(app));
             }
 
-            var viewRenderer = new CompositeViewRenderer(options?.Logger,
-                new PrecompiledViewRenderer(options?.Logger),
-                new RazorViewRenderer(options?.Logger));
+            var safeLogger = options?.Logger ?? NullLogger.Instance;
+
+            var viewRenderer = new CompositeViewRenderer(safeLogger,
+                new PrecompiledViewRenderer(safeLogger),
+                new RazorViewRenderer(safeLogger));
 
             var stormpathMiddleware = StormpathMiddleware.Create(new StormpathOwinOptions()
             {
@@ -41,7 +44,7 @@ namespace Stormpath.AspNet
                 ViewRenderer = viewRenderer,
                 Configuration = options?.Configuration,
                 ConfigurationFileRoot = AppDomain.CurrentDomain.BaseDirectory,
-                Logger = options?.Logger,
+                Logger = safeLogger,
                 PostChangePasswordHandler = options?.PostChangePasswordHandler,
                 PostLoginHandler = options?.PostLoginHandler,
                 PostLogoutHandler = options?.PostLogoutHandler,
@@ -60,7 +63,7 @@ namespace Stormpath.AspNet
             app.Use<StormpathAuthenticationMiddleware>(
                 new StormpathAuthenticationOptions() { AllowedAuthenticationSchemes = new[] { "Cookie", "Bearer" } },
                 stormpathMiddleware.Configuration,
-                options?.Logger);
+                safeLogger);
 
             app.UseStageMarker(PipelineStage.Authenticate);
 

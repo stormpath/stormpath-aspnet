@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Infrastructure;
@@ -21,7 +22,7 @@ namespace Stormpath.AspNet
             IntegrationConfiguration configuration,
             ILogger logger)
         {
-            _logger = logger;
+            _logger = logger ?? NullLogger.Instance;
 
             _protector = CreateRouteProtector(configuration);
         }

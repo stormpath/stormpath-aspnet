@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using Stormpath.Configuration.Abstractions.Immutable;
 using Stormpath.Owin.Abstractions;
 using Stormpath.Owin.Abstractions.Configuration;
@@ -23,7 +24,7 @@ namespace Stormpath.AspNet
 
         public RazorViewRenderer(ILogger logger)
         {
-            _logger = logger;
+            _logger = logger ?? NullLogger.Instance;
         }
 
         public Task<bool> RenderAsync(string name, object model, IOwinEnvironment context,

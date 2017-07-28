@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Owin;
 using Stormpath.Configuration.Abstractions;
@@ -41,7 +43,8 @@ namespace Stormpath.AspNet.TckHarness
             app.UseStormpath(new StormpathMiddlewareOptions()
             {
                 Configuration = stormpathConfiguration,
-                Logger = new FileLogger(logPath, LogLevel.Trace)
+                Logger = new FileLogger(logPath, LogLevel.Trace),
+                CacheProvider = new MemoryDistributedCache(new MemoryCache(new MemoryCacheOptions())),
             });
         }
     }

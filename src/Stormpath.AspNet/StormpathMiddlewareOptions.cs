@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Stormpath.Owin.Middleware;
@@ -12,6 +14,10 @@ namespace Stormpath.AspNet
         public object Configuration { get; set; }
 
         public ILogger Logger { get; set; } = NullLogger.Instance;
+
+        public IDistributedCache CacheProvider { get; set; }
+
+        public IDictionary<Type, DistributedCacheEntryOptions> CacheEntryOptions { get; set; }
 
         public Func<PreChangePasswordContext, CancellationToken, Task> PreChangePasswordHandler { get; set; }
 

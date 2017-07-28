@@ -45,6 +45,8 @@ namespace Stormpath.AspNet
                 Configuration = options?.Configuration,
                 ConfigurationFileRoot = AppDomain.CurrentDomain.BaseDirectory,
                 Logger = safeLogger,
+                CacheProvider = options?.CacheProvider,
+                CacheEntryOptions = options?.CacheEntryOptions,
                 PostChangePasswordHandler = options?.PostChangePasswordHandler,
                 PostLoginHandler = options?.PostLoginHandler,
                 PostLogoutHandler = options?.PostLogoutHandler,

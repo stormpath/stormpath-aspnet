@@ -112,16 +112,16 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Stormpath.Configuration, Version=7.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Stormpath.Configuration.7.1.0-beta3\lib\net45\Stormpath.Configuration.dll</HintPath>
+      <HintPath>..\..\packages\Stormpath.Configuration.7.1.0\lib\net45\Stormpath.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="Stormpath.Configuration.Abstractions, Version=7.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Stormpath.Configuration.Abstractions.7.1.0-beta3\lib\net45\Stormpath.Configuration.Abstractions.dll</HintPath>
+      <HintPath>..\..\packages\Stormpath.Configuration.Abstractions.7.1.0\lib\net45\Stormpath.Configuration.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Stormpath.Owin.Abstractions, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Stormpath.Owin.Abstractions.2.1.0-beta1\lib\net45\Stormpath.Owin.Abstractions.dll</HintPath>
+      <HintPath>..\..\packages\Stormpath.Owin.Abstractions.2.1.0\lib\net45\Stormpath.Owin.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Stormpath.Owin.Middleware, Version=4.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Stormpath.Owin.Middleware.4.1.0-beta4\lib\net451\Stormpath.Owin.Middleware.dll</HintPath>
+      <HintPath>..\..\packages\Stormpath.Owin.Middleware.4.1.0\lib\net451\Stormpath.Owin.Middleware.dll</HintPath>
     </Reference>
     <Reference Include="Stormpath.Owin.Views.Precompiled, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Stormpath.Owin.Views.Precompiled.1.0.0\lib\net45\Stormpath.Owin.Views.Precompiled.dll</HintPath>
